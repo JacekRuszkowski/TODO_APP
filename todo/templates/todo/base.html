@@ -1,0 +1,81 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TO DO APP</title>
+    <script src="https://kit.fontawesome.com/4a1df0074f.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'todo/css/main.css' %}">
+    <link rel="stylesheet" media="screen and (min-width:576px)" href="{% static 'todo/css/small.css' %}">
+    <link rel="stylesheet" media="screen and (min-width:768px)" href="{% static 'todo/css/medium.css' %}">
+    <link rel="stylesheet" media="screen and (min-width:992px)" href="{% static 'todo/css/large.css' %}">
+</head>
+
+<body>
+
+    <div class="navigation">
+        <div class="navigation-mobile">
+            <img class="img-logo-mobile" src="/media/todo_logo_color.svg" alt="logo">
+            <div class="navigation-mobile-dropped">
+                {% if user.is_authenticated %}
+                <ul class='list-mobile'>
+                    <li><a href="{% url 'add-board' %}">dodaj tablicę</a></li>
+                    <li><a href="{% url 'logout' %}">wyloguj</a></li>
+                </ul>
+                {% else %}
+                <ul class='list-mobile'>
+                    <li><a href="{% url 'login' %}">zaloguj</a></li>
+                    <li><a href="{% url 'register' %}">zarejestruj</a></li>
+                </ul>
+                {% endif %}
+            </div>
+            <div id="hamburger">
+                <a href="#" class="hamburger-menu"><i class="fas fa-bars"></i></a>
+                <!-- <button><i class="fas fa-bars"></i></button> -->
+            </div>
+        </div>
+        <div class="navigation-desktop">
+            <a href="{% url 'tasks-view' %}"><img class="img-logo" src="/media/todo_logo_color.svg" alt="logo"></a>
+            {% if user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'logout' %}">wyloguj</a></li>
+                <li><a href="{% url 'add-board' %}">dodaj tablicę</a></li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="{% url 'login' %}">zaloguj</a></li>
+                <li><a href="{% url 'register' %}">zarejestruj</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+    <main class="wrapper">
+        {% if messages %}
+        <div class="messages">
+            <div class="icon">
+                <i class="fas fa-info"></i>
+            </div>
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'todo/js/script.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+
+<div class="form form-auth">
+    {{ form.errors }}
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Zaloguj się</h2>
+        <div class="form-field auth-field">
+            {{ form.username }}
+            {{ form.password }}
+            <button class='button-form button-auth' type="submit">zaloguj</button>
+            <p class="small-text">Nie masz konta?
+                <a href="{% url 'register' %}">Zarejestruj</a>
+            </p>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

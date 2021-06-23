@@ -1,0 +1,45 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+<section class="boards">
+    {% if boards.count == 0 %}
+    <a class="btn-add-task btn-add-board" href="{% url 'add-board' %}">dodaj tablicę</a>
+    {% else %}
+    {% for board in boards %}
+    <div class="board">
+        <div class="board-name">
+            <a href="{% url 'edit-board' board.id %}" class="board-title">{{ board }}</a>
+            <a href="{% url 'delete-board' board.id %}">
+                <i class="far fa-trash-alt"></i>
+            </a>
+        </div>
+        <div class="line"></div>
+        {% for task in tasks %}
+        {% if task.task_board.id == board.id %}
+        <div class="task-bar">
+            <div class="task-bar-content">
+                {% if task.done == True %}
+                <a href="{% url 'edit-task' task.id %}" class="task task-done">{{ task }}</a>
+                {% else %}
+                <a href="{% url 'edit-task' task.id %}" class="task">{{ task }}</a>
+                {% endif %}
+            </div>
+            <a class="btn-task btn-trash" href="{% url 'delete-task' task.id %}">
+                <i class="far fa-minus-square"></i>
+            </a>
+            <a class="btn-task btn-done" href="{% url 'task-status' task.id %}">
+                <i class="far fa-check-square"></i>
+            </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <a class="btn-add-task" href="{% url 'add-task' board.id %}">
+            dodaj zadanie
+        </a>
+    </div>
+    {% endfor %}
+    {% endif %}
+</section>
+
+{% endblock content%}

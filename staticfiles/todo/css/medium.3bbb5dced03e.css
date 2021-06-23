@@ -1,0 +1,36 @@
+/* @media (min-width: 768px) */
+.navigation-mobile {
+  display: none;
+}
+
+.navigation-desktop {
+  display: block;
+}
+
+.navigation-desktop ul {
+  text-align: right;
+  padding-right: 50px;
+}
+
+.navigation li {
+  display: inline-block;
+}
+
+.navigation li a {
+  line-height: 50px;
+  font-size: 15px;
+  color: #646464;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0 20px;
+}
+
+.img-logo {
+  position: absolute;
+  height: 25px;
+  left: 50px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+/*# sourceMappingURL=medium.3bbb5dced03e.css.map */

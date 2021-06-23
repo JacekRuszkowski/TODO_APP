@@ -1,0 +1,26 @@
+{% extends 'todo/base.html' %}
+{% block content %}
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- MY FORM -->
+                <div class="form">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div class="form-field">
+                            {{ form.task_name }}
+                            <br>
+                            <button class="button-form button-add" type="submit">zapisz</button>
+                            <a href="{% url 'tasks-view' %}" class="button-form button-back">wróć</a>
+                        </div>
+                    </form>
+                </div>
+                <!-- MY FORM -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
